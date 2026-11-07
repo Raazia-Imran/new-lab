@@ -9,6 +9,7 @@ const data = JSON.parse(
 const documents = [
   data.settings,
   data.home,
+  data.pageSettings,
   ...data.projects,
   ...data.publications,
   ...data.achievements,
@@ -30,7 +31,7 @@ if (!apply) {
   );
   process.exit(0);
 }
-const projectId = process.env.SANITY_PROJECT_ID;
+const projectId = process.env.SANITY_PROJECT_ID || "4isekt9n";
 const dataset = process.env.SANITY_DATASET || "production";
 if (!projectId || !process.env.SANITY_API_TOKEN)
   throw new Error(

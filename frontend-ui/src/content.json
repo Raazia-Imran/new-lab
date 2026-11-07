@@ -6,10 +6,10 @@
     "university": "NED University of Engineering and Technology",
     "department": "Department of Mechanical Engineering",
     "logoPath": "/images/logo.png",
-    "email": "mmslab@neduet.edu.pk",
-    "phone": "+92-21-99261261-8 Ext: 2208",
-    "phoneNote": "(or relevant extension)",
-    "labHead": "Dr. [Name] (Principal Investigator)",
+    "email": "",
+    "phone": "",
+    "phoneNote": "",
+    "labHead": "",
     "address": [
       "Multiscale Modelling & Simulation Lab",
       "Department of Mechanical Engineering",
@@ -17,46 +17,84 @@
       "University Road, Karachi-75270, Pakistan"
     ],
     "socialLinks": [
-      { "_key": "website", "label": "Website", "url": "" },
-      { "_key": "scholar", "label": "Google Scholar", "url": "" },
-      { "_key": "github", "label": "GitHub", "url": "" }
+      {
+        "_key": "website",
+        "label": "Website",
+        "url": ""
+      },
+      {
+        "_key": "scholar",
+        "label": "Google Scholar",
+        "url": ""
+      },
+      {
+        "_key": "github",
+        "label": "GitHub",
+        "url": ""
+      }
     ],
     "navigation": [
-      { "_key": "home", "label": "Home", "path": "/" },
-      { "_key": "about", "label": "About", "path": "/about/" },
-      { "_key": "projects", "label": "Projects", "path": "/projects/" },
-      { "_key": "papers", "label": "Papers", "path": "/papers/" },
+      {
+        "_key": "home",
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "_key": "about",
+        "label": "About",
+        "path": "/about/"
+      },
+      {
+        "_key": "projects",
+        "label": "Projects",
+        "path": "/projects/"
+      },
+      {
+        "_key": "papers",
+        "label": "Papers",
+        "path": "/papers/"
+      },
       {
         "_key": "achievements",
         "label": "Achievements",
         "path": "/achievements/"
       },
-      { "_key": "clients", "label": "Clients", "path": "/clients/" },
-      { "_key": "resources", "label": "Resources", "path": "/resources/" }
+      {
+        "_key": "clients",
+        "label": "Clients",
+        "path": "/clients/"
+      },
+      {
+        "_key": "resources",
+        "label": "Resources",
+        "path": "/resources/"
+      }
     ],
-    "reviewStatus": "needs-review"
+    "reviewStatus": "needs-review",
+    "emailPlaceholder": "Official email to be confirmed",
+    "nedLogoPath": "/brand/ned-logo.png"
   },
   "home": {
     "_id": "homePage",
     "_type": "homePage",
-    "eyebrow": "NED University · Mechanical Engineering",
-    "heroTitle": "Multiscale Modelling & Simulation Lab",
-    "heroDescription": "We focus on advanced multiscale modeling and simulation techniques for solving complex engineering and scientific problems.",
-    "heroImagePath": "/images/hero-bg.png",
-    "aboutTitle": "About Us",
+    "eyebrow": "NED UNIVERSITY OF ENGINEERING & TECHNOLOGY",
+    "heroTitle": "Small scales.\nBigger possibilities.",
+    "heroDescription": "Multiscale modelling and simulation for complex engineering problems. Connecting atomic behaviour to the structures and systems around us.",
+    "heroImagePath": "/images/simulation-art.webp",
+    "aboutTitle": "A closer look.\nA wider understanding.",
     "aboutParagraphs": [
       "Our lab specializes in multiscale simulations that bridge atomic, microscopic, and macroscopic scales to understand material behavior, fluid dynamics, and structural mechanics.",
       "We collaborate with industry and academia to develop innovative computational tools and apply them to real-world challenges."
     ],
-    "projectTitle": "Projects",
-    "papersTitle": "Research Papers",
-    "achievementTitle": "Achievements",
-    "partnersTitle": "Clients & Partners",
+    "projectTitle": "Ideas shaped by simulation.",
+    "papersTitle": "Published perspectives.",
+    "achievementTitle": "Progress, made visible.",
+    "partnersTitle": "Working beyond the lab.",
     "partnersSubtitle": "Our Recent Valuable Clients",
-    "resourcesTitle": "Resources",
+    "resourcesTitle": "The research toolkit.",
     "contactTitle": "Contact Us",
-    "primaryActionLabel": "Explore our projects",
-    "secondaryActionLabel": "About the lab",
+    "primaryActionLabel": "Explore the research",
+    "secondaryActionLabel": "Discover our approach",
     "contactActionLabel": "Get in touch",
     "reviewStatus": "needs-review"
   },
@@ -68,7 +106,9 @@
       "slug": "nano-channel-flow-analysis",
       "summary": "Multiscale modeling of fluid dynamics in nano-channels using molecular dynamics and continuum methods.",
       "order": 1,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "discipline": "Fluid dynamics",
+      "methods": ["Molecular dynamics", "Continuum modelling"]
     },
     {
       "_id": "project-composite",
@@ -77,7 +117,9 @@
       "slug": "composite-material-reinforcement",
       "summary": "Studying the strengthening mechanisms in fiber-reinforced composites at multiple scales.",
       "order": 2,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "discipline": "Materials engineering",
+      "methods": ["Composite mechanics", "Multiscale analysis"]
     },
     {
       "_id": "project-steel",
@@ -86,7 +128,9 @@
       "slug": "phase-transformation-in-steels",
       "summary": "Predicting microstructure evolution during heat treatment using phase-field and CALPHAD approaches.",
       "order": 3,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "discipline": "Microstructure evolution",
+      "methods": ["Phase field", "CALPHAD"]
     }
   ],
   "publications": [
@@ -99,7 +143,11 @@
       "journal": "Journal of Materials Science",
       "url": "",
       "order": 1,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "doi": "",
+      "abstract": "",
+      "authorList": [],
+      "pdfPath": ""
     },
     {
       "_id": "paper-construction",
@@ -110,7 +158,11 @@
       "journal": "Construction and Building Materials",
       "url": "",
       "order": 2,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "doi": "",
+      "abstract": "",
+      "authorList": [],
+      "pdfPath": ""
     }
   ],
   "achievements": [
@@ -206,7 +258,9 @@
       "title": "Simulation Software Guide (PDF)",
       "url": "",
       "order": 1,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "category": "Guide",
+      "description": "A reference for the simulation software used in the lab."
     },
     {
       "_id": "resource-equipment",
@@ -214,7 +268,9 @@
       "title": "Lab Equipment List",
       "url": "",
       "order": 2,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "category": "Equipment",
+      "description": "Explore the lab’s computational and experimental resources."
     },
     {
       "_id": "resource-tutorials",
@@ -222,7 +278,9 @@
       "title": "Multiscale Modeling Tutorials",
       "url": "",
       "order": 3,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "category": "Tutorial",
+      "description": "Learning materials for multiscale modelling methods."
     },
     {
       "_id": "resource-codes",
@@ -230,7 +288,72 @@
       "title": "Open-Source Codes on GitHub",
       "url": "",
       "order": 4,
-      "reviewStatus": "needs-review"
+      "reviewStatus": "needs-review",
+      "category": "Software",
+      "description": "Source code and tools for reproducible computational research."
     }
-  ]
+  ],
+  "pageSettings": {
+    "_id": "pageSettings",
+    "_type": "pageSettings",
+    "pages": [
+      {
+        "_key": "0",
+        "path": "/about/",
+        "kicker": "INSIDE THE LAB",
+        "title": "A different scale.\nA deeper understanding.",
+        "description": "Connecting engineering questions with multiscale computational methods."
+      },
+      {
+        "_key": "1",
+        "path": "/projects/",
+        "kicker": "RESEARCH EXPLORER",
+        "title": "Questions worth\nlooking closer at.",
+        "description": "Explore our work in fluid dynamics, material behaviour and microstructure evolution."
+      },
+      {
+        "_key": "2",
+        "path": "/papers/",
+        "kicker": "RESEARCH LIBRARY",
+        "title": "Our work,\nin the literature.",
+        "description": "Explore publications, authors and the ideas behind our research."
+      },
+      {
+        "_key": "3",
+        "path": "/achievements/",
+        "kicker": "LAB MILESTONES",
+        "title": "Research takes shape.\nProgress follows.",
+        "description": "Explore the achievement information supplied for the lab."
+      },
+      {
+        "_key": "4",
+        "path": "/clients/",
+        "kicker": "CLIENTS & PARTNERS",
+        "title": "Better questions.\nShared perspectives.",
+        "description": "Connections between research, academia and industry."
+      },
+      {
+        "_key": "5",
+        "path": "/resources/",
+        "kicker": "THE RESEARCH TOOLKIT",
+        "title": "Start exploring.\nKeep discovering.",
+        "description": "Guides, learning materials, equipment information and open-source tools."
+      },
+      {
+        "_key": "6",
+        "path": "/contact/",
+        "kicker": "LET’S CONNECT",
+        "title": "A conversation can\nopen a new direction.",
+        "description": "Research questions, ideas for collaboration and enquiries are welcome."
+      },
+      {
+        "_key": "7",
+        "path": "/privacy/",
+        "kicker": "PRIVACY NOTICE",
+        "title": "Your information.\nHandled with care.",
+        "description": "How this website handles contact enquiries and essential services."
+      }
+    ],
+    "reviewStatus": "needs-review"
+  }
 }

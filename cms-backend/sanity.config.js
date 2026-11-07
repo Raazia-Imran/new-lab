@@ -2,12 +2,12 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemaTypes/index.js";
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || "4isekt9n";
 if (!projectId)
   throw new Error(
     "Set SANITY_STUDIO_PROJECT_ID in cms-backend/.env to the NEW lab project ID. No existing client project is used.",
   );
-const singletons = ["siteSettings", "homePage"];
+const singletons = ["siteSettings", "homePage", "pageSettings"];
 export default defineConfig({
   name: "default",
   title: "Multiscale Lab Content Studio",
@@ -30,6 +30,13 @@ export default defineConfig({
               .title("Home page & headings")
               .child(
                 S.document().schemaType("homePage").documentId("homePage"),
+              ),
+            S.listItem()
+              .title("Page headings and introductions")
+              .child(
+                S.document()
+                  .schemaType("pageSettings")
+                  .documentId("pageSettings"),
               ),
             S.divider(),
             ...S.documentTypeListItems().filter(

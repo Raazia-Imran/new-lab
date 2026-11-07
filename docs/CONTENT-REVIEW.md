@@ -30,3 +30,7 @@ The original PNG files are copied byte-for-byte. The source CSS defines dark blu
 ## Exact source preservation
 
 The eight original PHP files and `styles.css` are retained in `source-reference/`. The frontend's eight original PNG files remain in `frontend-ui/public/images/`. Original Bootstrap libraries and maps are not runtime dependencies of the React version.
+
+## Redesign changes
+
+The source email and phone are now blank placeholders pending client confirmation. A new headline, conceptual scale explanation and resource descriptions are proposed editorial copy and should be reviewed in the client questionnaire. Page introductions and section headings are editable in Sanity. Publications now include fields for full authors, DOI, abstract and permitted PDF uploads; the source provides none of these missing details. Do not invent them to fill the interface.

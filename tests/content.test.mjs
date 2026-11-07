@@ -60,7 +60,7 @@ test("supplied source text and asset counts are retained", async () => {
         html.includes(item.title),
         `Missing source match: ${item.title}`,
       );
-  assert.equal(paths.length, 8);
+  assert.equal(paths.length, 9);
 });
 test("imported document IDs are unique and require editorial review", () => {
   const all = [

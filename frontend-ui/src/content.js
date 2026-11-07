@@ -9,6 +9,7 @@ export const paths = [
   "/clients/",
   "/resources/",
   "/contact/",
+  "/privacy/",
 ];
 export const routeNames = {
   "/": "Home",
@@ -19,9 +20,16 @@ export const routeNames = {
   "/clients/": "Clients & Partners",
   "/resources/": "Resources",
   "/contact/": "Contact Us",
+  "/privacy/": "Privacy Notice",
 };
 export function safeUrl(value) {
-  if (typeof value !== "string" || !value || value === "#") return null;
+  if (
+    typeof value !== "string" ||
+    !value ||
+    value === "#" ||
+    /[\\\x00-\x1f]/.test(value)
+  )
+    return null;
   if (value.startsWith("/") && !value.startsWith("//")) return value;
   try {
     const u = new URL(value);
@@ -40,6 +48,7 @@ export function normalizeContent(data) {
   return {
     settings: { ...source.settings, ...data.settings },
     home: { ...source.home, ...(data.home || {}) },
+    pageSettings: data.pageSettings || source.pageSettings,
     ...Object.fromEntries(
       ["projects", "publications", "achievements", "partners", "resources"].map(
         (key) => [key, Array.isArray(data[key]) ? data[key] : []],
@@ -56,10 +65,11 @@ export async function fetchContent(projectId, dataset = "production", signal) {
     return source;
   const imageProjection = '"asset": asset->{url}';
   const query = `{
+    "pageSettings": *[_type == "pageSettings" && _id == "pageSettings"][0],
     "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{...,logo{${imageProjection}}},
     "home": *[_type == "homePage" && _id == "homePage"][0]{...,heroImage{${imageProjection}}},
     "projects": *[_type == "project"] | order(order asc, _id asc),
-    "publications": *[_type == "publication"] | order(order asc, _id asc),
+    "publications": *[_type == "publication"] | order(order asc, _id asc){...,"pdfUrl":pdf.asset->url},
     "achievements": *[_type == "achievement"] | order(order asc, _id asc),
     "partners": *[_type == "partner"] | order(order asc, _id asc){...,logo{${imageProjection}}},
     "resources": *[_type == "resource"] | order(order asc, _id asc){...,"fileUrl":file.asset->url}
@@ -69,7 +79,7 @@ export async function fetchContent(projectId, dataset = "production", signal) {
   );
   url.searchParams.set("query", query);
   url.searchParams.set("perspective", "published");
-  const response = await fetch(url, { signal, credentials: "omit" });
+  const response = await fetch(url, { signal: signal || AbortSignal.timeout(8000), credentials: "omit" });
   if (!response.ok)
     throw new Error(`Content service returned ${response.status}`);
   const payload = await response.json();

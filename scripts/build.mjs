@@ -45,7 +45,7 @@ for (const route of [...paths, "/404/"]) {
       : `${routeNames[route] || "Page not found"} — ${content.settings.title}, ${content.settings.university}.`;
   const robots = publicIndexing && known ? "index,follow" : "noindex,nofollow";
   const url = origin + route;
-  const tags = `<title>${escape(title)}</title><meta name="description" content="${escape(description)}"/><meta name="robots" content="${robots}"/><meta property="og:title" content="${escape(title)}"/><meta property="og:description" content="${escape(description)}"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/>${origin ? `<link rel="canonical" href="${escape(url)}"/><meta property="og:url" content="${escape(url)}"/><meta property="og:image" content="${escape(origin + "/images/hero-bg.png")}"/>` : ""}`;
+  const tags = `<title>${escape(title)}</title><meta name="description" content="${escape(description)}"/><meta name="robots" content="${robots}"/><meta property="og:title" content="${escape(title)}"/><meta property="og:description" content="${escape(description)}"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/>${origin ? `<link rel="canonical" href="${escape(url)}"/><meta property="og:url" content="${escape(url)}"/><meta property="og:image" content="${escape(origin + "/brand/social-card.png")}"/>` : ""}`;
   const html = template
     .replace("<!--app-html-->", render(route))
     .replace("<!--page-meta-->", tags)

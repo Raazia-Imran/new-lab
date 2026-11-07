@@ -1,50 +1,38 @@
-# Sanity organization, project and Studio
+# Selected Sanity project
 
-## Current state
+The client created organization o6odkcj36 and project 4isekt9n. This repository uses that project with its production dataset. No separate lab Sanity project was created by the developer, so there is no earlier developer-created Sanity project to delete. NC4SCM project dxinqb51 is separate and must not be changed or deleted.
 
-The Studio source and migration script are complete. A new organization/project has **not** been created: the connected laptop was offline and the available Sanity browser session required sign-in. No existing NC4SCM/GCGC project has been modified.
+## Local Studio
 
-## Create the isolated lab backend
+Run npm ci in the repository root, then npm run studio. The public project ID is the default in the Studio configuration; override it through the documented environment variables only for an intentional alternative setup. The import script remains locked to 4isekt9n.
 
-1. Sign in to Sanity Manage with the intended account. Create an organization named **Multiscale Modelling & Simulation Lab**. Use the free option; do not activate a paid subscription.
-2. Create a project named **Multiscale Lab Website** inside that organization.
-3. Create a dataset named **production**. This frontend is built for a public dataset containing public website content only. A private dataset needs a separate server read layer; never expose a private read token using a `VITE_` variable.
-4. Record the new project ID. Copy the two `.env.example` files to `.env` in their respective folders and enter that ID. Project IDs are public configuration; authentication tokens are secret.
-5. In project API settings, add only the required origins. For local development use the actual frontend origin printed by Vite (usually `http://localhost:5173`); for the Studio use `http://localhost:3333`. Add the exact preview/production frontend and deployed Studio origins once known. Allow credentials for Studio origins only. Do not use wildcard credentialed CORS.
-6. Start `npm run studio` and authenticate. The Studio has singleton panels for identity/contact and home headings, plus lists for projects, papers, achievements, partners and resources.
+Use npx sanity login inside cms-backend if your CLI session is not authenticated. No passwords or tokens should be placed in chat or committed to Git.
 
-## Import the supplied content
+## Import
 
-Create a project-scoped write token for migration. Put it in the root `.env` as `SANITY_API_TOKEN`, and put the new project ID in `SANITY_PROJECT_ID` and `VITE_SANITY_PROJECT_ID`. Do not commit `.env`, paste tokens into issue descriptions, or add tokens to frontend environment variables.
+Run these from cms-backend:
 
-```cmd
-npm run cms:seed
-npm run cms:seed:apply
+```
+npx sanity exec seed/import.mjs --with-user-token
+npx sanity exec seed/import.mjs --with-user-token -- --apply
 ```
 
-The preview command makes no API calls. The apply command uploads original image files and creates only missing records. It never replaces existing documents. All imported records are marked `Needs client review`. Re-running imports is safe for existing documents; it does not overwrite client edits. Review the pending content before marking it approved.
+The preview reports missing and existing records. Apply uploads images and creates missing records only. The current migration baseline contains 22 content records, including page headings. It does not overwrite existing edits. All supplied claims remain marked as needing client review.
 
-After import, revoke the migration token or remove it from the local environment when it is no longer needed.
+## CORS
 
-## Publish the Studio
+Allow exact frontend origins without credentials. Allow Studio origins with credentials for Sanity authentication. Do not use wildcard credentialed origins. Add the final client domain after it is chosen and remove obsolete temporary origins at handover.
 
-```cmd
-cd cms-backend
-npx sanity login
-npx sanity deploy
+## Studio deployment
+
+```
+npx sanity deploy --url multiscale-ned-lab --yes
 ```
 
-The configured preferred Studio hostname is `multiscale-modelling-lab`; availability is checked by Sanity at deployment time. If already taken, select another hostname and update `SANITY_STUDIO_HOSTNAME`. Do not claim a Studio URL until deployment succeeds.
+The live URL may be reported only after a successful deployment. The Content Lake backend remains hosted by Sanity; this command publishes the editing interface and schemas.
 
-Grant editors only the project role they need. No invitations are sent by this code.
+## Editing check
 
-## Verify after connection
+Publish a controlled change, reload the frontend and confirm it appears. Restore the field after verification if the change was only a test. Delete the last item in a test collection only when it is disposable; the frontend preserves intentional empty collections instead of repopulating them from the migration fallback.
 
-1. Confirm all 21 initial records appear, and the original images are uploaded.
-2. Edit a project title, publish it, reload the frontend and verify the change.
-3. Add a temporary resource with a real URL or uploaded PDF, publish and test its link, then remove the temporary item.
-4. Remove the last item in a temporary collection and confirm no fallback item reappears.
-5. Rebuild the frontend and check the rendered page source reflects the published update.
-6. Confirm a signed-out visitor can read the public website but cannot edit content.
-
-Official references: https://www.sanity.io/docs/cli-reference/projects and https://www.sanity.io/docs/content-lake/cors .
+GitHub/Vercel handover does not transfer Sanity organization ownership. Use Sanity’s normal membership/ownership controls and confirm billing/contact details separately.

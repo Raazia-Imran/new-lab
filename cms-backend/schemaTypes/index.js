@@ -47,6 +47,31 @@ const schema = (name, title, fields) =>
   });
 export const schemaTypes = [
   defineType({
+    name: "pageSettings",
+    title: "Page headings and introductions",
+    type: "document",
+    fields: [
+      defineField({
+        name: "pages",
+        title: "Pages",
+        type: "array",
+        of: [
+          {
+            type: "object",
+            fields: [
+              text("path", "Page path", { validation: required }),
+              text("kicker", "Section label"),
+              text("title", "Page title"),
+              area("description", "Introduction"),
+            ],
+            preview: { select: { title: "path", subtitle: "title" } },
+          },
+        ],
+      }),
+      status,
+    ],
+  }),
+  defineType({
     name: "siteSettings",
     title: "Site settings",
     type: "document",
@@ -56,6 +81,8 @@ export const schemaTypes = [
       text("department", "Department"),
       image("logo", "Original lab logo"),
       text("logoPath", "Bundled logo path", { readOnly: true }),
+      text("emailPlaceholder", "Placeholder shown until email is confirmed"),
+      text("nedLogoPath", "NED logo path", { readOnly: true }),
       text("email", "Contact email", { validation: (Rule) => Rule.email() }),
       text("phone", "Phone"),
       text("phoneNote", "Phone clarification"),
@@ -150,13 +177,43 @@ export const schemaTypes = [
     text("slug", "Page anchor", {
       validation: (Rule) => Rule.required().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     }),
+    text("discipline", "Research discipline"),
+    defineField({
+      name: "methods",
+      title: "Methods",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
     area("summary", "Summary"),
     area("description", "Additional project details"),
     ...common,
   ]),
   schema("publication", "Research paper", [
     text("title", "Paper title", { validation: required }),
-    text("authors", "Authors"),
+    text("authors", "Short author line"),
+    defineField({
+      name: "authorList",
+      title: "Complete author list in publication order",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
+    text("doi", "DOI", {
+      description: "Enter the DOI starting with 10. Do not invent a DOI.",
+      validation: (Rule) =>
+        Rule.custom(
+          (v) =>
+            !v ||
+            /^10\.[0-9]{4,9}\//.test(v) ||
+            "Enter a DOI starting with 10.",
+        ),
+    }),
+    area("abstract", "Abstract"),
+    defineField({
+      name: "pdf",
+      title: "Publication PDF with permission to share",
+      type: "file",
+      options: { accept: "application/pdf" },
+    }),
     text("year", "Year", {
       type: "number",
       validation: (Rule) => Rule.required().integer().min(1900).max(2200),
@@ -185,6 +242,18 @@ export const schemaTypes = [
     ...common,
   ]),
   schema("resource", "Resource", [
+    text("category", "Resource category", {
+      options: {
+        list: [
+          "Guide",
+          "Equipment",
+          "Tutorial",
+          "Software",
+          "Dataset",
+          "Resource",
+        ],
+      },
+    }),
     text("title", "Resource title", { validation: required }),
     area("description", "Description"),
     url("url", "External resource URL"),
