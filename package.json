@@ -1,0 +1,37 @@
+{
+  "name": "multiscale-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "cms-backend"
+  ],
+  "scripts": {
+    "dev": "vite --config frontend-ui/vite.config.js --host 0.0.0.0",
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview --config frontend-ui/vite.config.js --host 0.0.0.0",
+    "test": "node --test tests/*.test.mjs",
+    "studio": "npm run dev --workspace=cms-backend",
+    "studio:build": "npm run build --workspace=cms-backend",
+    "cms:seed": "node --env-file-if-exists=.env scripts/seed.mjs",
+    "cms:seed:apply": "node --env-file-if-exists=.env scripts/seed.mjs --apply"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "@sanity/client": "8.15.0"
+  },
+  "devDependencies": {
+    "vite": "8.1.6",
+    "@vitejs/plugin-react": "5.2.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "overrides": {
+    "js-yaml@^3": "3.15.2",
+    "smol-toml": "1.9.1",
+    "undici@^7": "7.30.2",
+    "minimatch@>=7 <11.0.1": "11.0.5"
+  }
+}

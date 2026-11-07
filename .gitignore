@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.sanity/
+.env
+.env.*
+!.env.example
+!.env.production.example
+.sites-runtime/
+.ssr/
+*.log
+.DS_Store
+frontend-ui/qa-responsive.html
