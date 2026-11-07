@@ -16,8 +16,9 @@
 
 ## Before public domain launch
 
-- [ ] Confirm imported records and deployed Studio in the selected Sanity project.
-- [ ] Confirm the Vercel review deployment uses the intended Git commit and selected dataset.
+- [x] Import 22 records into the selected project and confirm live frontend CMS reads.
+- [x] Deploy Studio and schemas at https://multiscale-ned-lab.sanity.studio/.
+- [x] Confirm the Vercel review deployment uses the redesign commit and selected dataset.
 - [ ] Confirm client Vercel team, plan/billing and domain ownership.
 - [ ] Transfer the Vercel project before domain connection if possible.
 - [ ] Confirm all award, grant, publication and partner claims.

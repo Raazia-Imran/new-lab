@@ -7,3 +7,7 @@ Desktop browser checks confirmed publication search, its detail dialog, and the 
 The client questionnaire was rendered and reviewed across all eight pages in both Word and PDF. Original lab/client logo assets remain unchanged. New illustration and branding provenance are documented in ASSETS-AND-MOTION.md.
 
 Live deployment and content import are separate checks. The selected Sanity project is 4isekt9n, organization o6odkcj36. Vercel’s temporary review project belongs to Raazia’s projects. The final client domain, official contact details, Web3Forms recipient and all publication PDFs/DOIs remain dependent on client input. No claim is made that unpublished source placeholders have been verified.
+
+## Live checks completed
+
+Vercel frontend returned HTTP 200 for Home, Papers, Resources, Contact, the social card, favicon and robots file. CSP, X-Content-Type-Options, Referrer-Policy, X-Frame-Options and Permissions-Policy were present. The frontend browser loaded its hero image from the selected Sanity CDN project, confirming live content/image delivery. Sanity reported 22 content records and eight image assets. Studio and its schema deployment completed successfully at https://multiscale-ned-lab.sanity.studio/. GitHub Actions passed the redesign commit.

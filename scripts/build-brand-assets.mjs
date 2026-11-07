@@ -1,7 +1,11 @@
 import { readFile, writeFile } from "node:fs/promises";
 import sharp from "sharp";
-const img = await readFile("frontend-ui/public/images/simulation-art.webp");
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#080d28"/><image href="data:image/webp;base64,${img.toString("base64")}" width="740" height="630" x="460" preserveAspectRatio="xMidYMid slice"/><rect width="640" height="630" fill="#080d28"/><rect x="65" y="76" width="34" height="5" rx="2" fill="#ff8c00"/><text x="65" y="126" font-family="Arial" font-size="15" letter-spacing="2" fill="#a9b0ce">NED UNIVERSITY</text><g font-family="Arial" font-size="54" font-weight="600" fill="white"><text x="60" y="238">Multiscale</text><text x="60" y="305">Modelling &amp;</text><text x="60" y="372">Simulation Lab</text></g><text x="65" y="459" font-family="Arial" font-size="20" fill="#f7941d">Research across scales.</text><text x="65" y="554" font-family="Arial" font-size="14" fill="#a9b0ce">Department of Mechanical Engineering</text></svg>`;
+const img = await sharp(
+  await readFile("frontend-ui/public/images/simulation-art.webp"),
+)
+  .png()
+  .toBuffer();
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#080d28"/><image href="data:image/png;base64,${img.toString("base64")}" width="740" height="630" x="460" preserveAspectRatio="xMidYMid slice"/><rect width="640" height="630" fill="#080d28"/><rect x="65" y="76" width="34" height="5" rx="2" fill="#ff8c00"/><text x="65" y="126" font-family="Arial" font-size="15" letter-spacing="2" fill="#a9b0ce">NED UNIVERSITY</text><g font-family="Arial" font-size="54" font-weight="600" fill="white"><text x="60" y="238">Multiscale</text><text x="60" y="305">Modelling &amp;</text><text x="60" y="372">Simulation Lab</text></g><text x="65" y="459" font-family="Arial" font-size="20" fill="#f7941d">Research across scales.</text><text x="65" y="554" font-family="Arial" font-size="14" fill="#a9b0ce">Department of Mechanical Engineering</text></svg>`;
 await sharp(Buffer.from(svg))
   .png()
   .toFile("frontend-ui/public/brand/social-card.png");
