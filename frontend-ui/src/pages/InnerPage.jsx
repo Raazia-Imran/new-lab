@@ -8,6 +8,11 @@ import ScaleExplorer from "../components/ScaleExplorer.jsx";
 import Contact from "./Contact.jsx";
 import Icon from "../components/Icon.jsx";
 const meta = {
+  "/team/": [
+    "OUR PEOPLE",
+    "The team behind the research.",
+    "Meet the people working across scales.",
+  ],
   "/about/": [
     "INSIDE THE LAB",
     "A different scale.\nA deeper understanding.",
@@ -57,11 +62,6 @@ export default function InnerPage({ path, data }) {
   return (
     <>
       <section className="page-hero">
-        <div className="breadcrumb">
-          <a href="/">Home</a>
-          <span>/</span>
-          <span>{label}</span>
-        </div>
         <div>
           <span className="eyebrow">
             <i />
@@ -99,9 +99,44 @@ export default function InnerPage({ path, data }) {
             </div>
           </section>
           <ScaleExplorer />
+          <section className="section white-bridge">
+            <span className="eyebrow">RESEARCH ENQUIRIES</span>
+            <h2>Find the right starting point.</h2>
+            <p>
+              Explore the research projects for current topics, the publication
+              library for published work, or the team page to learn who is
+              involved.
+            </p>
+            <div className="tags">
+              <a href="/projects/">Research projects →</a>
+              <a href="/papers/">Publication library →</a>
+              <a href="/team/">Meet the team →</a>
+            </div>
+          </section>
         </>
       ) : (
         <section className="section inner-content">
+          {path === "/team/" && (
+            <div className="team-grid">
+              {data.team?.length ? (
+                data.team.map((m) => (
+                  <article key={m._id}>
+                    <h2>{m.name}</h2>
+                    <p>{m.role}</p>
+                    <p>{m.biography}</p>
+                  </article>
+                ))
+              ) : (
+                <div className="empty-state">
+                  <h2>Team profiles are being prepared.</h2>
+                  <p>
+                    Approved names, roles, biographies and photographs will be
+                    added here.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
           {path === "/projects/" && <Projects data={data.projects} />}
           {path === "/papers/" && <Publications data={data.publications} />}
           {path === "/achievements/" && (

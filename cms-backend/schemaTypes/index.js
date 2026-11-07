@@ -47,6 +47,32 @@ const schema = (name, title, fields) =>
   });
 export const schemaTypes = [
   defineType({
+    name: "pageContent",
+    title: "Page content",
+    type: "document",
+    fields: [
+      text("path", "Page address", { readOnly: true }),
+      text("kicker", "Small heading"),
+      text("title", "Page title", { validation: required }),
+      area("description", "Page introduction"),
+    ],
+    preview: { select: { title: "title", subtitle: "path" } },
+  }),
+  defineType({
+    name: "teamMember",
+    title: "Team member",
+    type: "document",
+    fields: [
+      text("name", "Full name", { validation: required }),
+      text("role", "Role"),
+      area("biography", "Biography"),
+      image("photo", "Profile photograph"),
+      url("profileUrl", "Academic profile link"),
+      order,
+    ],
+    preview: { select: { title: "name", subtitle: "role", media: "photo" } },
+  }),
+  defineType({
     name: "pageSettings",
     title: "Page headings and introductions",
     type: "document",

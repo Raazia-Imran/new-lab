@@ -1,0 +1,27 @@
+name: Deploy Sanity Studio
+on:
+  push:
+    branches: [main]
+    paths: ['cms-backend/**', 'package-lock.json', '.github/workflows/deploy-sanity-studio.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Deploy Studio using repository secret
+        working-directory: cms-backend
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+          SANITY_STUDIO_PROJECT_ID: 4isekt9n
+          SANITY_STUDIO_DATASET: production
+        run: |
+          test -n "$SANITY_AUTH_TOKEN" || { echo 'Add SANITY_AUTH_TOKEN in repository Actions secrets to enable automatic Studio deployment.'; exit 1; }
+          npx sanity deploy --url multiscale-ned-lab --yes

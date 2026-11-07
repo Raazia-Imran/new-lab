@@ -10,6 +10,7 @@ export const paths = [
   "/resources/",
   "/contact/",
   "/privacy/",
+  "/team/",
 ];
 export const routeNames = {
   "/": "Home",
@@ -21,6 +22,7 @@ export const routeNames = {
   "/resources/": "Resources",
   "/contact/": "Contact Us",
   "/privacy/": "Privacy Notice",
+  "/team/": "Team",
 };
 export function safeUrl(value) {
   if (
@@ -48,7 +50,10 @@ export function normalizeContent(data) {
   return {
     settings: { ...source.settings, ...data.settings },
     home: { ...source.home, ...(data.home || {}) },
-    pageSettings: data.pageSettings || source.pageSettings,
+    pageSettings: data.pages?.length
+      ? { pages: data.pages }
+      : data.pageSettings || source.pageSettings,
+    team: data.team || [],
     ...Object.fromEntries(
       ["projects", "publications", "achievements", "partners", "resources"].map(
         (key) => [key, Array.isArray(data[key]) ? data[key] : []],
@@ -65,6 +70,8 @@ export async function fetchContent(projectId, dataset = "production", signal) {
     return source;
   const imageProjection = '"asset": asset->{url}';
   const query = `{
+    "team": *[_type == "teamMember"] | order(order asc),
+    "pages": *[_type == "pageContent"],
     "pageSettings": *[_type == "pageSettings" && _id == "pageSettings"][0],
     "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{...,logo{${imageProjection}}},
     "home": *[_type == "homePage" && _id == "homePage"][0]{...,heroImage{${imageProjection}}},
@@ -79,7 +86,10 @@ export async function fetchContent(projectId, dataset = "production", signal) {
   );
   url.searchParams.set("query", query);
   url.searchParams.set("perspective", "published");
-  const response = await fetch(url, { signal: signal || AbortSignal.timeout(8000), credentials: "omit" });
+  const response = await fetch(url, {
+    signal: signal || AbortSignal.timeout(8000),
+    credentials: "omit",
+  });
   if (!response.ok)
     throw new Error(`Content service returned ${response.status}`);
   const payload = await response.json();

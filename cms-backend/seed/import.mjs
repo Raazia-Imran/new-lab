@@ -14,6 +14,11 @@ if (client.config().projectId !== "4isekt9n")
     "This migration is restricted to the client-selected lab project 4isekt9n.",
   );
 const all = [
+  ...data.pageSettings.pages.map((p) => ({
+    ...p,
+    _id: "page-" + p.path.split("/")[1],
+    _type: "pageContent",
+  })),
   data.settings,
   data.home,
   ...(data.pageSettings ? [data.pageSettings] : []),

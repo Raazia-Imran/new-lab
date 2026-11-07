@@ -2558,3 +2558,20 @@ button:disabled {
 .orbit {
   z-index: 2;
 }
+.white-bridge {
+  background: #fff;
+}
+.white-bridge p {
+  max-width: 700px;
+}
+.white-bridge .tags {
+  gap: 25px;
+  color: var(--blue);
+}
+.team-grid {
+  display: grid;
+  gap: 24px;
+}
+.nav {
+  gap: 17px;
+}

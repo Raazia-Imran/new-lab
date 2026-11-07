@@ -45,6 +45,11 @@
         "path": "/about/"
       },
       {
+        "_key": "team",
+        "label": "Team",
+        "path": "/team/"
+      },
+      {
         "_key": "projects",
         "label": "Projects",
         "path": "/projects/"
@@ -270,7 +275,7 @@
       "order": 2,
       "reviewStatus": "needs-review",
       "category": "Equipment",
-      "description": "Explore the lab’s computational and experimental resources."
+      "description": "Explore the lab\u2019s computational and experimental resources."
     },
     {
       "_id": "resource-tutorials",
@@ -342,7 +347,7 @@
       {
         "_key": "6",
         "path": "/contact/",
-        "kicker": "LET’S CONNECT",
+        "kicker": "LET\u2019S CONNECT",
         "title": "A conversation can\nopen a new direction.",
         "description": "Research questions, ideas for collaboration and enquiries are welcome."
       },
@@ -352,8 +357,16 @@
         "kicker": "PRIVACY NOTICE",
         "title": "Your information.\nHandled with care.",
         "description": "How this website handles contact enquiries and essential services."
+      },
+      {
+        "_key": "team",
+        "path": "/team/",
+        "kicker": "OUR PEOPLE",
+        "title": "The team behind the research.",
+        "description": "Meet the people working across scales."
       }
     ],
     "reviewStatus": "needs-review"
-  }
+  },
+  "team": []
 }

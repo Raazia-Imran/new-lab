@@ -20,27 +20,82 @@ export default defineConfig({
           .title("Multiscale Lab")
           .items([
             S.listItem()
-              .title("Lab identity & contact")
+              .title("Global Site Settings")
               .child(
                 S.document()
                   .schemaType("siteSettings")
                   .documentId("siteSettings"),
               ),
             S.listItem()
-              .title("Home page & headings")
+              .title("Home Page")
               .child(
                 S.document().schemaType("homePage").documentId("homePage"),
               ),
-            S.listItem()
-              .title("Page headings and introductions")
-              .child(
-                S.document()
-                  .schemaType("pageSettings")
-                  .documentId("pageSettings"),
-              ),
-            S.divider(),
-            ...S.documentTypeListItems().filter(
-              (item) => !singletons.includes(item.getId()),
+            ...[
+              ["About Page", "about", null],
+              ["Team Page", "team", "teamMember"],
+              ["Projects Page", "projects", "project"],
+              ["Research Papers Page", "papers", "publication"],
+              ["Achievements Page", "achievements", "achievement"],
+              ["Clients and Partners Page", "clients", "partner"],
+              ["Resources Page", "resources", "resource"],
+              ["Contact Page", "contact", null],
+              ["Privacy Page", "privacy", null],
+            ].map(([title, key, type]) =>
+              S.listItem()
+                .title(title)
+                .child(
+                  S.list()
+                    .title(title)
+                    .items([
+                      S.listItem()
+                        .title("Page heading and introduction")
+                        .child(
+                          S.document()
+                            .schemaType("pageContent")
+                            .documentId("page-" + key),
+                        ),
+                      ...(key === "contact"
+                        ? [
+                            S.listItem()
+                              .title("Contact details")
+                              .child(
+                                S.document()
+                                  .schemaType("siteSettings")
+                                  .documentId("siteSettings"),
+                              ),
+                          ]
+                        : []),
+                      ...(key === "about"
+                        ? [
+                            S.listItem()
+                              .title("About the lab text")
+                              .child(
+                                S.document()
+                                  .schemaType("homePage")
+                                  .documentId("homePage")
+                                  .views([S.view.form().title("About text")]),
+                              ),
+                          ]
+                        : []),
+                      ...(type
+                        ? [
+                            S.listItem()
+                              .title(
+                                {
+                                  teamMember: "Team profiles",
+                                  project: "Project entries",
+                                  publication: "Papers and PDFs",
+                                  achievement: "Milestones",
+                                  partner: "Partner logos",
+                                  resource: "Resource entries",
+                                }[type],
+                              )
+                              .child(S.documentTypeList(type).title(title)),
+                          ]
+                        : []),
+                    ]),
+                ),
             ),
           ]),
     }),
