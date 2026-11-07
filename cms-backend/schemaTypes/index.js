@@ -147,6 +147,8 @@ export const schemaTypes = [
                       [
                         "/",
                         "/about/",
+                        "/team/",
+                        "/privacy/",
                         "/projects/",
                         "/papers/",
                         "/achievements/",
